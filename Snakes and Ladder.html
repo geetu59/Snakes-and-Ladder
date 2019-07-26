@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Snakes and Ladder</title>
+<!--    <link  href="css/font-awesome.min.css" rel="stylesheet">	-->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"><!-- font-awesome link-->
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <style>
+	.main {
+    	position: relative;
+	}
+    h2{
+        padding-bottom: 10px;
+        font-size: 32px;
+    padding-top: 10px;
+    }
+    .player1, .player2 {
+        padding: 0 32px 25px 88px;
+        display: inline-block;
+    font-size: 32px;
+    text-align: center;
+    }/*
+    .player1:after {
+    top: 0px;
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -15px;
+}
+.player2:after {
+    border: 1px solid #000;
+    top: 0px;
+    position: absolute;
+	.position-0:after {
+    top: -36px;
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -45px;
+}
+    content: "";
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -15px;
+}*/
+.position-0,.position-1{position:relative;}
+.position-0:after {
+    top: -36px;
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -45px;
+}
+.position-1:after {
+    top: -36px;
+    position: absolute;
+    content: "";
+    background: #fff;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -45px;
+	border:1px solid black;
+}
+    .newGame {
+        padding-left: 58px;
+    display: inline-block;
+    font-size: 32px;
+    text-transform: uppercase;
+}
+    .newGame a {
+    text-decoration: none;
+    color: #000;
+}
+    .roll,.diceImage {
+            padding: 16px 0 0 41px;
+    display: inline-block;
+}
+    .roll a {
+    text-transform: uppercase;
+    font-size: 32px;
+    text-decoration: none;
+    color: #000;
+}
+    .roll a i {
+    font-size: 34px;
+}
+    .diceImage img {
+        padding-left: 95px;
+    width: 100px;
+}
+	.table {
+    	position: absolute;
+    	width: 63%;
+    	right: 0px;
+		top:0;
+	}
+		.col-md-1 {
+		position:relative;
+		font-weight:600;
+    float: left;
+    width: 51px;
+    border: 1px solid black;
+    text-align: center;
+    padding: 15px;
+    height: 25px;
+    font-size: 20px;
+	}
+	.col-md-2 {
+    display: inline-block;
+	}
+	h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 25px;
+}
+.color1 .col-md-1{
+	background: rgb(58,52,240);
+background: radial-gradient(circle, rgba(58,52,240,1) 35%, rgba(97,149,238,1) 100%);
+}
+.table .color2 .col-md-1{
+background: rgb(181,61,112);
+background: radial-gradient(circle, rgba(181,61,112,1) 35%, rgba(197,128,240,1) 100%);
+}
+
+.table .color3 .col-md-1{
+background: rgb(181,155,61);
+background: radial-gradient(circle, rgba(181,155,61,1) 35%, rgba(211,240,128,1) 100%);
+}
+.table .color4 .col-md-1{
+background: rgb(11,240,84);
+background: radial-gradient(circle, rgba(11,240,84,1) 35%, rgba(147,156,46,1) 100%);
+}
+
+.table .color5 .col-md-1{
+background: rgb(249,87,87);
+background: radial-gradient(circle, rgba(249,87,87,1) 35%, rgba(241,9,23,1) 100%);
+}
+.col-md-1.ladder1:before {
+    top: -30px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    width: 140px;
+    height: 3px;
+    transform: rotate(122deg);
+    left: -12px;
+}
+.col-md-1.ladder1:after{
+    top: -21px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    width: 140px;
+    height: 3px;
+    transform: rotate(122deg);
+    left: 18px;
+}
+.slant1{
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 32px;
+    height: 3px;
+    transform: rotate(31deg);
+    top: -53px;
+    right: -28px;
+}
+.slant1:before {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 32px;
+    height: 3px;
+    transform: rotate(5deg);
+    top: 32px;
+    right: 2px;
+}
+.slant1:after{
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 32px;
+    height: 3px;
+    transform: rotate(5deg);
+    top: 65px;
+    right: 3px;
+}
+.col-md-1.ladder2:before {
+    transform: rotate(45deg);
+    top: -24px;
+    left: -65px;
+    width: 135px;
+}
+.slant2 {
+    transform: rotate(130deg);
+    left: 22px;
+    top: -16px;
+}
+.col-md-1.ladder2:after {
+    top: -36px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    width: 134px;
+    height: 3px;
+    transform: rotate(45deg);
+    left: -45px;
+}
+.slant2:after{width:28px;}
+.slant2:before{width:28px;}
+.slant2 {
+    width: 24px;
+    transform: rotate(130deg);
+    left: 16px;
+    top: -11px;
+}
+.col-md-1.ladder3:before {
+    top: -4px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    width: 90px;
+    height: 3px;
+    transform: rotate(122deg);
+    left: 24px;
+}
+.col-md-1.ladder3:after {
+    top: 6px;
+    background-color: #000;
+    position: absolute;
+    content: "";
+    width: 92px;
+    height: 3px;
+    transform: rotate(122deg);
+    left: 39px;
+}
+.slant3 {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 23px;
+    height: 3px;
+    transform: rotate(31deg);
+    top: -16px;
+    right: -19px;
+}
+.slant3:before {
+    top: 24px;
+    position: absolute;
+    content: "";
+    background: black;
+    width: 19px;
+    height: 3px;
+    left: 1px;
+}
+.slant3:after{
+    top: 46px;
+    position: absolute;
+    content: "";
+    background: black;
+    width: 19px;
+    height: 3px;
+    left: 1px;
+}
+.col-md-1.ladder4:after {
+    transform: rotate(45deg);
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 252px;
+    height: 3px;
+    top: -68px;
+    left: -145px;
+}
+.col-md-1.ladder4:before {
+    transform: rotate(45deg);
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 252px;
+    height: 3px;
+    top: -45px;
+    left: -180px;
+}
+.slant4 {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-42deg);
+}
+.slant4:before {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-1deg);
+    top: -32px;
+    left: 0;
+}
+.slant4:after {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-1deg);
+    top: -65px;
+    left: -3px;
+}
+.slant5 {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-41deg);
+    top: -74px;
+    left: -72px;
+}
+.slant5:before {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 40px;
+    height: 3px;
+    top: -30px;
+    left: -4px;
+    transform: rotate(-5deg);
+}
+.slant5:after {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 40px;
+    height: 3px;
+    top: 28px;
+    left: 0px;
+    transform: rotate(0deg);
+}
+.slant6 {
+    position: absolute;
+    content: "";
+    width: 42px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-41deg);
+    top: -129px;
+    left: -131px;
+}
+.slant6:after {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 42px;
+    height: 3px;
+    top: 24px;
+    left: 4px;
+}
+.col-md-1.ladder7:after {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 351px;
+    height: 3px;
+    transform: rotate(142deg);
+    left: -29px;
+    top: -82px;
+}
+.col-md-1.ladder7:before {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 351px;
+    height: 3px;
+    transform: rotate(142deg);
+    top: -64px;
+    left: 0px;
+}
+.slant7{
+width:35px;
+transform: rotate(59deg);
+left:31px;
+}
+.slant7:before{
+width:29px;
+}
+.slant7:after{width:27px;}
+.slant8 {
+    position: absolute;
+    content: "";
+    width: 32px;
+    height: 3px;
+    background: #000;
+    transform: rotate(55deg);
+    top: -64px;
+    left: 134px;
+}
+.slant8:before{
+width:36px;
+transform: rotate(1deg);
+}
+.slant8:after{
+width:34px;
+}
+.slant9 {
+    position: absolute;
+    content: "";
+    width: 31px;
+    height: 3px;
+    background: #000;
+    transform: rotate(52deg);
+    top: -111px;
+    left: 197px;
+}
+.slant9:before {
+    position: absolute;
+    content: "";
+    width: 31px;
+    height: 3px;
+    background: #000;
+    transform: rotate(2deg);
+    top: -27px;
+    left: 0;
+}
+.slant9:after {
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 34px;
+    height: 3px;
+    top: 24px;
+    left: -3px;
+}
+.slant10 {
+    position: absolute;
+    content: "";
+    width: 31px;
+    height: 3px;
+    background: #000;
+    transform: rotate(55deg);
+    top: -158px;
+    left: 257px;
+}
+.slant10:before {
+    position: absolute;
+    content: "";
+    width: 31px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-2deg);
+    top: -21px;
+    left: -3px;
+}
+.slant10:after {
+    position: absolute;
+    content: "";
+    width: 32px;
+    height: 3px;
+    background: #000;
+    transform: rotate(-2deg);
+    top: 23px;
+    left: -3px;
+}
+.image1:after{
+background-image:url(images/snake3.png);
+}
+.col-md-4 {
+    padding-top: 18px;
+    width: 380px;
+}
+.col-md-8 {
+    position: relative;
+    top:-322px;
+}
+.image1 img {
+    position: absolute;
+    transform: rotate(115deg);
+    width: 127px;
+    height: 270px;
+    top: -28px;
+    left: 47%;
+    z-index: 1;
+}
+.image2 img {
+    right: 159px;
+    position: absolute;
+    z-index: 1;
+    top: 119px;
+    width: 245px;
+    height: 145px;
+    transform: rotate(158deg);
+}
+.image3 img {
+    position: absolute;
+    top: 300px;
+    transform: rotate(180deg);
+    z-index: 1;
+    left: 38%;
+    width: 272px;
+    height: 195px;
+}
+.image4 img {
+    width: 378px;
+    position: absolute;
+    z-index: 1;
+    height: 235px;
+    transform: rotate(180deg);
+    right: 9%;
+    top: 365px;
+}
+.circle{
+    position: absolute;
+    background: #000;
+    width: 35px;
+    height: 35px;
+    top: 19%;
+    left: 23%;
+    content: "";
+    border-radius: 100%;
+	display:none;
+}
+.position-0:after {
+    top: -36px;
+    position: absolute;
+    content: "";
+    background: #000;
+    width: 35px;
+    height: 35px;
+    border-radius: 100%;
+    right: -45px;
+}.active.player1:after {
+    position: absolute;
+    content: "";
+    background: red;
+    width: 10px;
+    height: 10px;
+    top: 31px;
+    left: 55px;
+    border-radius: 100%;
+}
+.active.player2:after {
+    position: absolute;
+    content: "";
+    background: red;
+    width: 10px;
+    height: 10px;
+    top: 130px;
+    left: 55px;
+    border-radius: 100%;
+}
+	</style>
+</head>
+
+<body>
+	<h2>SNAKES AND LADDERS</h2>
+	<div class="main">
+    	<div class="row">
+        	<div class="col-md-4">
+            	<div class="player1 active">
+                	<div class="player-0">Player1</div>
+                    <div class="position-0 black">44 </div>
+                </div>
+                <div class="player2 ">
+                    <div class="player-1">Player2</div>
+                    <div class="position-1 white">89 </div>
+                </div>
+            <div class="newGame">
+                <a href="#"><i class="fa fa-plus-circle" aria-hidden="true"></i>new game</a>
+            </div>
+            <br>
+            <div class="roll">
+                <a href="#"><i class="fa fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>roll dice</a>
+            </div>
+            <br>
+            <div class="diceImage"><img class="dice" src="images/dice-6.png"/></div>
+            </div>
+            <div class="col-md-8">
+            	<div class="image1">
+                	<img src="images/snake2.png"/>
+                </div>
+                <div class="image2">
+                	 <img src="images/snake12.png"/>
+                </div>
+                <div class="image3">
+                	<img src="images/snake14.png"/>
+                </div>
+                <div class="image4">
+                	<img src="images/snake17.png"/>
+                </div>
+	              
+            	<div class="table">
+                	<div class="row">
+                    	<div class="color1">
+                    	<div class="col-md-1" id="100"><div class="circle"></div>100</div>
+                        <div class="col-md-1" id="99"><div class="circle"></div>99</div>
+                        <div class="col-md-1" id="98"><div class="circle"></div>98</div>
+                        <div class="col-md-1" id="97"><div class="circle"></div>97</div>
+                        <div class="col-md-1" id="96"><div class="circle"></div>96</div>
+                        <div class="col-md-1" id="95"><div class="circle"></div>95</div>
+                        <div class="col-md-1" id="94"><div class="circle"></div>94</div>
+                        <div class="col-md-1" id="93"><div class="circle"></div>93</div>
+                        <div class="col-md-1" id="92"><div class="circle"></div>92</div>
+                        <div class="col-md-1" id="91"><div class="circle"></div>91</div>
+                        </div>
+                        
+                        <div class="color2">
+                        <div class="col-md-1" id="81"><div class="circle"></div>81</div>
+                        <div class="col-md-1" id="82"><div class="circle"></div>82</div>
+                        <div class="col-md-1" id="83"><div class="circle"></div>83</div>
+                        <div class="col-md-1" id="84"><div class="circle"></div>84</div>
+                        <div class="col-md-1" id="85"><div class="circle"></div>85</div>
+                        <div class="col-md-1" id="86"><div class="circle"></div>86</div>
+                        <div class="col-md-1" id="87"><div class="circle"></div>87</div>
+                        <div class="col-md-1" id="88"><div class="circle"></div>88</div>
+                        <div class="col-md-1" id="89"><div class="circle"></div>89</div>
+                        <div class="col-md-1" id="90"><div class="circle"></div>90</div>
+                        </div>
+                        
+                        <div class="color3">
+                        <div class="col-md-1" id="80"><div class="circle"></div>80</div>
+                        <div class="col-md-1" id="79"><div class="circle"></div>79</div>
+                        <div class="col-md-1" id="78"><div class="circle"></div>78</div>
+                        <div class="col-md-1" id="77"><div class="circle"></div>77</div>
+                        <div class="col-md-1" id="76"><div class="circle"></div>76</div>
+                        <div class="col-md-1" id="75"><div class="circle"></div>75</div>
+                        <div class="col-md-1" id="74"><div class="circle"></div>74</div>
+                        <div class="col-md-1" id="73"><div class="circle"></div>73</div>
+                        <div class="col-md-1" id="72"><div class="circle"></div>72</div>
+                        <div class="col-md-1" id="71"><div class="circle"></div>71</div>
+                        </div>
+                        
+                        <div class="color4">
+                        <div class="col-md-1" id="61"><div class="circle"></div>61</div>
+                        <div class="col-md-1 ladder1 ladder2" id="62"><div class="slant1 slant2"></div><div class="circle"></div>62</div>
+                        <div class="col-md-1" id=63""><div class="circle"></div>63</div>
+                        <div class="col-md-1" id="64"><div class="circle"></div>64</div>
+                        <div class="col-md-1" id="65"><div class="circle"></div>65</div>
+                        <div class="col-md-1" id="66"><div class="circle"></div>66</div>
+                        <div class="col-md-1" id="67"><div class="circle"></div>67</div>
+                        <div class="col-md-1" id="68"><div class="circle"></div>68</div>
+                        <div class="col-md-1" id="69"><div class="circle"></div>69</div>
+                        <div class="col-md-1" id="70"><div class="circle"></div>70</div>
+                        </div>
+                        
+                        <div class="color5">
+                        <div class="col-md-1" id="60"><div class="circle"></div>60</div>
+                        <div class="col-md-1" id="59"><div class="circle"></div>59</div>
+                        <div class="col-md-1" id="58"><div class="circle"></div>58</div>
+                        <div class="col-md-1" id="57"><div class="circle"></div>57</div>
+                        <div class="col-md-1 ladder7" id="56"><div class="circle"></div><div class="slant4 slant7"></div><div class="slant5 slant8"></div><div class="slant9"></div><div class="slant10"></div>56</div>
+                        <div class="col-md-1" id="55"><div class="circle"></div>55</div>
+                        <div class="col-md-1" id="54"><div class="circle"></div>54</div>
+                        <div class="col-md-1" id="53"><div class="circle"></div>53</div>
+                        <div class="col-md-1" id="52"><div class="circle"></div>52</div>
+                        <div class="col-md-1" id="51"><div class="circle"></div>51</div>
+                        </div>
+                        
+                        <div class="color1">
+                        <div class="col-md-1" id="41"><div class="circle"></div>41</div>
+                        <div class="col-md-1 ladder1" id="42"><div class="circle"></div><div class="slant1"></div>42</div>
+                        <div class="col-md-1" id="43"><div class="circle"></div>43</div>
+                        <div class="col-md-1" id="44"><div class="circle"></div>44</div>
+                        <div class="col-md-1" id="45"><div class="circle"></div>45</div>
+                        <div class="col-md-1" id="46"><div class="circle"></div>46</div>
+                        <div class="col-md-1" id="47"><div class="circle"></div>47</div>
+                        <div class="col-md-1" id="48"><div class="circle"></div>48</div>
+                        <div class="col-md-1" id="49"><div class="circle"></div>49</div>
+                        <div class="col-md-1 ladder1 ladder2" id="50"><div class="circle"></div><div class="slant1 slant2"></div>50
+                        </div>
+                        
+                        <div class="color2">
+                        <div class="col-md-1" id="40"><div class="circle"></div>40</div>
+                        <div class="col-md-1" id="39"><div class="circle"></div>39</div>
+                        <div class="col-md-1" id="38"><div class="circle"></div>38</div>
+                        <div class="col-md-1" id="37"><div class="circle"></div>37</div>
+                        <div class="col-md-1" id="36"><div class="circle"></div>36</div>
+                        <div class="col-md-1" id="35"><div class="circle"></div>35</div>
+                        <div class="col-md-1" id="34"><div class="circle"></div>34</div>
+                        <div class="col-md-1 ladder3" id="33"><div class="circle"></div><div class="slant3"></div>33</div>
+                        <div class="col-md-1" id="32"><div class="circle"></div>32</div>
+                        <div class="col-md-1" id="31"><div class="circle"></div>31</div>
+                        </div>
+                        
+                        <div class="color3">
+                        <div class="col-md-1" id="21"><div class="circle"></div>21</div>
+                        <div class="col-md-1" id="22"><div class="circle"></div>22</div>
+                        <div class="col-md-1" id="23"><div class="circle"></div>23</div>
+                        <div class="col-md-1" id="24"><div class="circle"></div>24</div>
+                        <div class="col-md-1" id="25"><div class="circle"></div>25</div>
+                        <div class="col-md-1" id="26"><div class="circle"></div>26</div>
+                        <div class="col-md-1" id="27"><div class="circle"></div>27</div>
+                        <div class="col-md-1" id="28"><div class="circle"></div>28</div>
+                        <div class="col-md-1" id="29"><div class="circle"></div>29</div>
+                        <div class="col-md-1" id="30"><div class="circle"></div>30</div>
+                        </div>
+                        
+                        <div class="color4">
+                        <div class="col-md-1" id="20"><div class="circle"></div>20</div>
+                        <div class="col-md-1" id="19"><div class="circle"></div>19</div>
+                        <div class="col-md-1" id="18"><div class="circle"></div>18</div>
+                        <div class="col-md-1" id="17"><div class="circle"></div>17</div>
+                        <div class="col-md-1" id="16"><div class="circle"></div>16</div>
+                        <div class="col-md-1" id="15"><div class="circle"></div>15</div>
+                        <div class="col-md-1" id="14"><div class="circle"></div>14</div>
+                        <div class="col-md-1 ladder4" id="13"><div class="circle"></div><div class="slant4"></div><div class="slant5"></div><div class="slant6"></div>13</div>
+                        <div class="col-md-1" id="12"><div class="circle"></div>12</div>
+                        <div class="col-md-1" id="11"><div class="circle"></div>11</div>
+                        </div>
+                        
+                        <div class="color5">
+                        <div class="col-md-1" id="1"><div class="circle"></div>1</div>
+                        <div class="col-md-1" id="2"><div class="circle"></div>2</div>
+                        <div class="col-md-1 image1" id="3"><div class="circle"></div>3</div>
+                        <div class="col-md-1 ladder1" id="4"><div class="circle"></div><div class="slant1"></div>4</div>
+                        <div class="col-md-1" id="5"><div class="circle"></div>5</div>
+                        <div class="col-md-1" id="6"><div class="circle"></div>6</div>
+                        <div class="col-md-1" id="7"><div class="circle"></div>7</div>
+                        <div class="col-md-1" id="8"><div class="circle"></div>8</div>
+                        <div class="col-md-1" id="9"><div class="circle"></div>9</div>
+                        <div class="col-md-1" id="10"><div class="circle"></div>10</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dice"></div>
+            </div>
+            
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
